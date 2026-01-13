@@ -28,4 +28,15 @@ describe("ReactRouter Component", () => {
     await userEvent.click(screen.getByRole("link", { name: "Go to About" }));
     expect(await screen.findByText("About Page")).toBeInTheDocument();
   });
+
+  test("go back to Home", async () => {
+    render(
+      <MemoryRouter initialEntries={["/about"]}>
+        <ReactRouter />
+      </MemoryRouter>
+    );
+    expect(await screen.findByText("About Page")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("link", { name: "Go to Home" }));
+    expect(await screen.findByText("Home Page")).toBeInTheDocument();
+  });
 });
